@@ -1,0 +1,52 @@
+<div class="Creview" style="background-color:#f1f1e8;padding-top:1%;height:auto;">
+  <div class="container">
+  <div class="col-sm-12">
+  <div id="freview" class="col-sm-8">
+  <div class="col-sm-2" style="margin-top:20px;">
+    <div class="pp" style="padding-top:20%;">
+  <img src="pics/CoCo.jpg" style="width:80%;height:80%;border-radius: 50%;float:right;"/>
+    </div>
+  </div>
+  <div class="col-sm-3">
+    <div class="Udetails">
+      <p style="text-align:left;padding-top:30%">NAME<br>Write a review</p>
+
+</div>
+  </div>
+  <div class="col-sm-6">
+    <div class="Ureview">
+      
+<div class="rating" style="padding-top:10%;padding-left:70%;text-align:center;">
+
+  <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+  <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+  <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+  <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+  <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+</div>
+</div>
+</div>
+<br>
+<div class="col-sm-12" style="background-color:#000000;padding:10px;">
+<textarea style="width: 100%;" name="review" id="reviewU" rows="3"></textarea>
+</div>
+  </div>
+<div class="col-sm-4">
+  <div class="Cintro">
+    <div class="Ctitle">
+    <p>Company intro</p>
+</div>
+<div>
+  <ul class="intro-ul">
+  <li class="Cli"> ClaimedProfile</li>
+  <li class="Cli">Ask for reviews</li>
+  <li class="Cli">Pay for extra feattures</li>
+</ul>
+</div>
+  </div>
+</div>
+</div>
+
+  </div>
+</div>
+</div>

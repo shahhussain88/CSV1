@@ -1,0 +1,6 @@
+category			banks co working hotels resturants
+name			gitmit
+category			co working
+location			lahore
+ phone		3245875548
+ email		gitmitshit@gmail.com
