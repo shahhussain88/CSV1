@@ -20,18 +20,25 @@ if ($_SESSION['login_status'] == true)
 {
 	include('logoutmenu.php');
 }else{
+  echo '<script language="javascript">';
+              echo 'alert("Please Login First to Continue..")';
+              echo '</script>';
     echo '<script type="text/javascript">
          <!--
             function Redirect() {
                window.location="login.php";
             }
-            setTimeout("Redirect()", 1000);
+            setTimeout("Redirect()", 1);
          //-->
       </script>';
 }
 $name = $_GET['brandname'];
+if($name == null){
+  $name = $_SESSION['brandname'];
+}
+
 $username = $_SESSION['username'];
-$connection = mysqli_connect("localhost", "root", "", "accounts");
+include('db2.php');
             $sql1 = "SELECT * FROM brands where name = '$name'";
             $result1 = mysqli_query($connection, $sql1);
             //$row = mysqli_fetch_row($result);
@@ -42,6 +49,8 @@ $connection = mysqli_connect("localhost", "root", "", "accounts");
             $description = $row1['Location'];
             $category = $row1['Category'];
             $link = $row1['link'];
+            $_SESSION['brandname']=$name;
+            $_SESSION['category'] = $category;
 
             $sql2 = "SELECT * FROM users where username = '$username'";
             $result2 = mysqli_query($connection, $sql2);
@@ -397,7 +406,7 @@ for($e=1;$e<=$remaining;$e++){
 </div>
 <div class="container">
   <div class="col-sm-8 mv">
-    <div class="button"><p>Write a Review</p></div>
+    <div class="button"><a style="color:black" href="input.php"><p>Write a Review</p></div></a>
 </div>
 </div>
 <div class="list-review" style="background-color:white;">
@@ -407,6 +416,7 @@ for($e=1;$e<=$remaining;$e++){
 </div>
 <?php 
 include('listreview.php');
+
 ?>
   </div>
 </div>

@@ -185,7 +185,8 @@ else
 $username=$_POST['username'];
 $password=$_POST['password'];
 // Establishing Connection with Server by passing server_name, user_id and password as a parameter
-$connection = mysqli_connect("localhost", "root", "", "accounts");
+//$connection = mysqli_connect("localhost", "root", "", "accounts");
+include('db2.php');
 // To protect MySQL injection for Security purpose
 $username = stripslashes($username);
 $password = stripslashes($password);
@@ -206,7 +207,7 @@ echo '</script>';
 echo '<script type="text/javascript">
          <!--
             function Redirect() {
-               window.location="welcome.php";
+               window.location="categoriesf.php";
             }
             
             document.write("You will be redirected to main page in 10 sec.");

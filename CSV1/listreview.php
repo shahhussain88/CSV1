@@ -34,7 +34,7 @@
 //$category = $_SESSION['category'];
 //$category = 'Banks';
 //$brand = 'MCB';
-$connection = mysqli_connect("localhost", "root", "", "accounts");
+include('db2.php');
           $sql = "SELECT * FROM reviews where Brand = '$brand'";
           $result = mysqli_query($connection, $sql);
           //$row = mysqli_fetch_row($result);
@@ -53,7 +53,7 @@ $connection = mysqli_connect("localhost", "root", "", "accounts");
    <div class="review2">
 
 
-   <?php $connection = mysqli_connect("localhost", "root", "", "accounts");
+   <?php 
    $sql1 = "SELECT * FROM users where username = '$user'";
    $result1 = mysqli_query($connection, $sql1);
    //$row = mysqli_fetch_row($result);
@@ -81,10 +81,13 @@ for($e=1;$e<=$remaining;$e++){
  
    </div><br><br>
    <div class="comment">
-<?php echo $row['comment']?>
+<?php echo $row['comment'];
+
+?>
    </div>
 </div>
             <?php
           }
+          mysqli_close($connection);
 ?>
 </html>

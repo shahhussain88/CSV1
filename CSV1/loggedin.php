@@ -6,7 +6,7 @@
     } 
 	$username = $_SESSION['username'];
 	//echo $username;
-	$connection = mysqli_connect("localhost", "root", "", "accounts");
+  include('db2.php');
 $sql = "SELECT avatar FROM users WHERE username = '$username'";
 $result = mysqli_query($connection, $sql);
 $row = mysqli_fetch_row($result);

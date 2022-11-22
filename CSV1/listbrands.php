@@ -41,7 +41,7 @@ a:link{
 <?php
 //$category = $_SESSION['category'];
 
-$connection = mysqli_connect("localhost", "root", "", "accounts");
+include('db2.php');
           $sql = "SELECT * FROM brands where category = '$category'";
           $result = mysqli_query($connection, $sql);
           //$row = mysqli_fetch_row($result);

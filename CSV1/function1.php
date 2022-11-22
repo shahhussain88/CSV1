@@ -72,7 +72,7 @@ div.content{
     <div class="explore">
 <div class="Cmenu">
         <?php 
-        	$connection = mysqli_connect("localhost", "root", "", "accounts");
+        	include('db2.php');
           $sql = "SELECT * FROM categories";
           $result = mysqli_query($connection, $sql);
           //$row = mysqli_fetch_row($result);
@@ -87,8 +87,6 @@ div.content{
           </div>
             <div class="list"><ul>
             <?php
-            
-            $connection = mysqli_connect("localhost", "root", "", "accounts");
             $sql1 = "SELECT * FROM brands where category = '$row[Name]'";
             $result1 = mysqli_query($connection, $sql1);
             //$row = mysqli_fetch_row($result);

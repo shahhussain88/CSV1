@@ -14,10 +14,63 @@ if ($_SESSION['login_status'] == true)
 }else{
   include('navheader.html');
 }
+$user = $_SESSION['username'];
+$brandname = $_SESSION['brandname'];
+$category = $_SESSION['category'];
+$page =$_SERVER['PHP_SELF'];
+    if(isset($_POST['submit'])) 
+    {
+      $rate = $_POST['rating1'];
+      if(!empty($_POST['rating1'])) {
+        echo '  ' . $rate;
+    } else {
+        echo 'Please select the value.';
+    }
+      $comment=$_POST['comment'];
+      include('db2.php');
+            $sql1 = "INSERT INTO reviews (User, Category, Brand, stars, comment) VALUES('$user','$category','$brandname','$rate','$comment')";
+            if(mysqli_query($connection, $sql1)){
+
+              echo '<script language="javascript">';
+              echo 'alert("Data Added Successfully")';
+              echo '</script>';
+              echo '<script type="text/javascript">
+              <!--
+              function Redirect() {
+               window.location="review2.php";
+              }
+            
+              document.write("You will be redirected to main page in 10 sec.");
+              setTimeout("Redirect()", 100);
+              //-->
+              </script>';
+              }
+              
+              else{
+              
+              echo mysqli_error($connection);
+              
+              }
+              mysqli_close($connection);
+    }
 ?>
     <style>
+      @media only screen and (max-width: 600px) {
+        .mainB{
+        width:80%;
+        }
+      }
+      .okname{
+        
+        background-color: white;
+        height: fit-content;
+        text-align: center;
+        padding: 10px;
+        overflow: hidden;
+      }
     .mainB{
         width:50%;
+        overflow:hidden;
         margin-top: 50px;
         margin-left:20%;
         background-color: white;
@@ -29,6 +82,9 @@ if ($_SESSION['login_status'] == true)
     }
     body{
       background-color: #f1f1e8;
+      font-size: 25px;
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: -0.72px;
     }
     .star-rating {
    margin:10px 10px 0px;
@@ -86,11 +142,26 @@ if ($_SESSION['login_status'] == true)
   width: 100%;
 }
     </style>
+    <?php 
+    
+    ?>
     <body>
-      
-        <div class="mainB">
+      <div class="ok">
+        <div class="okname row">
+        <div id="text1" class="col-sm-8">
+    <div id="Cpic" class="col-sm-2">
+    <img src="pics/<?php echo $brandname?>.png" style="max-height:100px;object-fit:cover;object-position:bottom;padding-left:400%;" /> 
+    </div>
+    <div class="col-sm-2" style="max-width:20%;float:left;margin:25px;padding-left:50%;">
+    <div class="details">
+      <?php echo $brandname;?>
+</div>
+</div>
+</div>
+        </div>
+        <div class="mainB" style="min-width:300px;">
             <div class="form">
-                <form class="form-horizontal" action="input.php">
+                <form class="form-horizontal" action="" method="post">
                 
                 <div class="form-group">
                 <label class="control-label" for="pwd">Rate your recent experience</label>
@@ -107,18 +178,21 @@ if ($_SESSION['login_status'] == true)
                 </div>
                 <div class="form-group">
                 <label class="control-label" for="pwd">Comments</label><br>
-                <div class="col-sm-7"> 
-                <textarea class="form-control" rows="5" id="comment" placeholder="What made your experience great? What is this company doing well? Remember to be honest, helpful, and constructive!" style="width:130%;"></textarea>
+                <div class="commentbox">
+                <div  style="font-size:2vw;padding-right:40%;"> 
+                <textarea class="form-control" rows="5" cols="50" id="comment" name="comment" placeholder="What made your experience great? What is this company doing well? Remember to be honest, helpful, and constructive!" style="width:130%;"></textarea>
+                </div>
                 </div>
                 </div>
                 <div class="form-group">
                 <div>
-                  <button type="submit" class="btn btn-default">Submit</button>
+                  <button type="submit" name="submit" class="btn btn-default">Submit</button>
                 </div>
                 </div>
                 </form>
             </div>
         </div>
+</div>
     </body>
     <footer></footer>
 </html>
