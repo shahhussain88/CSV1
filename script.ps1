@@ -5,7 +5,7 @@ subscriptionId = '7a648a44-eced-4459-8256-09eba55734c5'
 az aks install-cli --only-show-errors
 
 #get clientID
-clientID = 'a36394c8-dc81-4333-b145-99ab8003203d'
+#clientID = 'a36394c8-dc81-4333-b145-99ab8003203d'
 
 # Get AKS credentials
 az aks get-credentials \
@@ -35,10 +35,10 @@ diagnosticSettingName="DefaultDiagnosticSettings"
 # Install the Application Load Balancer Controller
 command="helm upgrade alb-controller oci://mcr.microsoft.com/application-lb/charts/alb-controller \
 --install \
---create-namespace \
---namespace azure-alb-system \
+--namespace default \
 --version 0.6.3 \
---set albController.podIdentity.clientID= $clientID"
+--set albController.namespace=azure-alb-system \
+--set albController.podIdentity.clientID= a36394c8-dc81-4333-b145-99ab8003203d"
 
 az aks command invoke \
 --name 'tsudev-aks' \
@@ -47,4 +47,5 @@ az aks command invoke \
 --command "$command"
 
 
-#helm install alb-controller oci://mcr.microsoft.com/application-lb/charts/alb-controller --namespace default --version 0.6.3 --set albController.namespace=azure-alb-system  --set albController.podIdentity.clientID=$(az identity show -g 'tsudev-rg' -n azure-alb-identity --query clientId -o tsv)
+#helm install alb-controller oci://mcr.microsoft.com/application-lb/charts/alb-controller 
+#--namespace default --version 0.6.3 --set albController.namespace=azure-alb-system  --set albController.podIdentity.clientID=$(az identity show -g 'tsudev-rg' -n azure-alb-identity --query clientId -o tsv)
