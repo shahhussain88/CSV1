@@ -1,3 +1,47 @@
+# Install kubectl
+az aks install-cli --only-show-errors
 
-az aks get-credentials --resource-group 'tsudev-rg' --name 'tsudev-aks'
-helm install alb-controller oci://mcr.microsoft.com/application-lb/charts/alb-controller --namespace default --version 0.6.3 --set albController.namespace=azure-alb-system  --set albController.podIdentity.clientID=$(az identity show -g 'tsudev-rg' -n azure-alb-identity --query clientId -o tsv)
+#get clientID
+clientID = az identity show -g 'tsudev-rg' -n azure-alb-identity --query clientId -o tsv
+
+# Get AKS credentials
+az aks get-credentials \
+  --admin \
+  --name 'tsudev-aks' \
+  --resource-group 'tsudev-rg' \
+  --subscription '7a648a44-eced-4459-8256-09eba55734c5' \
+  --only-show-errors
+
+
+#az aks get-credentials --resource-group 'tsudev-rg' --name 'tsudev-aks'
+
+curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 -o get_helm.sh -s
+chmod 700 get_helm.sh
+./get_helm.sh &>/dev/null
+
+# Add Helm repos
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add jetstack https://charts.jetstack.io
+
+# Update Helm repos
+helm repo update
+
+applicationGatewayForContainersName='tsudev-agfc-alb'
+diagnosticSettingName="DefaultDiagnosticSettings"
+
+# Install the Application Load Balancer Controller
+command="helm upgrade alb-controller oci://mcr.microsoft.com/application-lb/charts/alb-controller \
+--install \
+--create-namespace \
+--namespace azure-alb-system \
+--version 0.6.3 \
+--set albController.podIdentity.clientID= $clientID"
+
+az aks command invoke \
+--name 'tsudev-aks' \
+--resource-group 'tsudev-rg' \
+--subscription '7a648a44-eced-4459-8256-09eba55734c5' \
+--command "$command"
+
+
+#helm install alb-controller oci://mcr.microsoft.com/application-lb/charts/alb-controller --namespace default --version 0.6.3 --set albController.namespace=azure-alb-system  --set albController.podIdentity.clientID=$(az identity show -g 'tsudev-rg' -n azure-alb-identity --query clientId -o tsv)
