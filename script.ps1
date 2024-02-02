@@ -1,15 +1,18 @@
+clusterName = 'tsudev-aks'
+resourceGroupName = 'tsudev-rg'
+subscriptionId = '7a648a44-eced-4459-8256-09eba55734c5'
 # Install kubectl
 az aks install-cli --only-show-errors
 
 #get clientID
-clientID = az identity show -g 'tsudev-rg' -n azure-alb-identity --query clientId -o tsv
+clientID = 'a36394c8-dc81-4333-b145-99ab8003203d'
 
 # Get AKS credentials
 az aks get-credentials \
   --admin \
-  --name 'tsudev-aks' \
-  --resource-group 'tsudev-rg' \
-  --subscription '7a648a44-eced-4459-8256-09eba55734c5' \
+  --name $clusterName \
+  --resource-group $resourceGroupName \
+  --subscription $subscriptionId \
   --only-show-errors
 
 
