@@ -1,1 +1,1 @@
-echo 'az group list'
+echo "hi" && az account show
