@@ -1,1 +1,1 @@
-az group list
+echo 'az group list'
