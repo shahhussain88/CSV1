@@ -1,3 +1,4 @@
-for ($i = 1; $i -le 10; $i++) {
-    Write-Output "Iteration $i"
-}
+for i in {1..10}
+do
+    echo "Iteration $i"
+done
