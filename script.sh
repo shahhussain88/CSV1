@@ -1,1 +1,1 @@
-echo "hi" && az account show
+'echo "hi" && az account show'
