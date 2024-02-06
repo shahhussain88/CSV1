@@ -1,1 +1,1 @@
-'az account show'
+
