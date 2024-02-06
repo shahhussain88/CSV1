@@ -1,1 +1,1 @@
-echo "hi"
+az account status
